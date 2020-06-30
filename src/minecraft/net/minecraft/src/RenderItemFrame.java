@@ -23,7 +23,6 @@ public class RenderItemFrame extends Render
         int var15 = par1EntityItemFrame.zPosition + Direction.offsetZ[par1EntityItemFrame.hangingDirection];
         GL11.glTranslatef((float)var13 - var10, (float)var14 - var11, (float)var15 - var12);
         this.renderFrameItemAsBlock(par1EntityItemFrame);
-        this.func_82402_b(par1EntityItemFrame);
         GL11.glPopMatrix();
     }
 
@@ -32,40 +31,108 @@ public class RenderItemFrame extends Render
      */
     private void renderFrameItemAsBlock(EntityItemFrame par1EntityItemFrame)
     {
+        Boolean var2 = Boolean.valueOf(false);
+        Boolean var3 = Boolean.valueOf(false);
+        ItemStack var4 = par1EntityItemFrame.getDisplayedItem();
+        EntityItem var5 = null;
+
+        if (var4 != null)
+        {
+            var2 = Boolean.valueOf(true);
+            var5 = new EntityItem(par1EntityItemFrame.worldObj, 0.0D, 0.0D, 0.0D, var4);
+            var5.getEntityItem().stackSize = 1;
+            var5.hoverStart = 0.0F;
+            var3 = Boolean.valueOf(var5.getEntityItem().getItem() == Item.map);
+        }
+
         GL11.glPushMatrix();
         this.renderManager.renderEngine.bindTexture("/terrain.png");
         GL11.glRotatef(par1EntityItemFrame.rotationYaw, 0.0F, 1.0F, 0.0F);
-        Block var2 = Block.planks;
-        float var3 = 0.0625F;
-        float var4 = 0.75F;
-        float var5 = var4 / 2.0F;
+        Block var6 = Block.planks;
+        float var7 = 0.0625F;
+        float var8 = 0.75F;
+
+        if (var3.booleanValue())
+        {
+            var8 = 1.0F;
+        }
+
+        float var9 = var8 / 2.0F;
         GL11.glPushMatrix();
-        this.renderBlocksInstance.overrideBlockBounds(0.0D, (double)(0.5F - var5 + 0.0625F), (double)(0.5F - var5 + 0.0625F), (double)(var3 * 0.5F), (double)(0.5F + var5 - 0.0625F), (double)(0.5F + var5 - 0.0625F));
+        this.renderBlocksInstance.overrideBlockBounds(0.0D, (double)(0.5F - var9 + var7), (double)(0.5F - var9 + var7), (double)(var7 * 0.5F), (double)(0.5F + var9 - var7), (double)(0.5F + var9 - var7));
         this.renderBlocksInstance.setOverrideBlockTexture(this.field_94147_f);
-        this.renderBlocksInstance.renderBlockAsItem(var2, 0, 1.0F);
+        this.renderBlocksInstance.renderBlockAsItem(var6, 0, 1.0F);
         this.renderBlocksInstance.clearOverrideBlockTexture();
         this.renderBlocksInstance.unlockBlockBounds();
         GL11.glPopMatrix();
         this.renderBlocksInstance.setOverrideBlockTexture(Block.planks.getIcon(1, 2));
         GL11.glPushMatrix();
-        this.renderBlocksInstance.overrideBlockBounds(0.0D, (double)(0.5F - var5), (double)(0.5F - var5), (double)(var3 + 1.0E-4F), (double)(var3 + 0.5F - var5), (double)(0.5F + var5));
-        this.renderBlocksInstance.renderBlockAsItem(var2, 0, 1.0F);
+        this.renderBlocksInstance.overrideBlockBounds(0.0D, (double)(0.5F - var9), (double)(0.5F - var9), (double)(var7 + 1.0E-4F), (double)(var7 + 0.5F - var9), (double)(0.5F + var9));
+        this.renderBlocksInstance.renderBlockAsItem(var6, 0, 1.0F);
         GL11.glPopMatrix();
         GL11.glPushMatrix();
-        this.renderBlocksInstance.overrideBlockBounds(0.0D, (double)(0.5F + var5 - var3), (double)(0.5F - var5), (double)(var3 + 1.0E-4F), (double)(0.5F + var5), (double)(0.5F + var5));
-        this.renderBlocksInstance.renderBlockAsItem(var2, 0, 1.0F);
+        this.renderBlocksInstance.overrideBlockBounds(0.0D, (double)(0.5F + var9 - var7), (double)(0.5F - var9), (double)(var7 + 1.0E-4F), (double)(0.5F + var9), (double)(0.5F + var9));
+        this.renderBlocksInstance.renderBlockAsItem(var6, 0, 1.0F);
         GL11.glPopMatrix();
         GL11.glPushMatrix();
-        this.renderBlocksInstance.overrideBlockBounds(0.0D, (double)(0.5F - var5), (double)(0.5F - var5), (double)var3, (double)(0.5F + var5), (double)(var3 + 0.5F - var5));
-        this.renderBlocksInstance.renderBlockAsItem(var2, 0, 1.0F);
+        this.renderBlocksInstance.overrideBlockBounds(0.0D, (double)(0.5F - var9), (double)(0.5F - var9), (double)var7, (double)(0.5F + var9), (double)(var7 + 0.5F - var9));
+        this.renderBlocksInstance.renderBlockAsItem(var6, 0, 1.0F);
         GL11.glPopMatrix();
         GL11.glPushMatrix();
-        this.renderBlocksInstance.overrideBlockBounds(0.0D, (double)(0.5F - var5), (double)(0.5F + var5 - var3), (double)var3, (double)(0.5F + var5), (double)(0.5F + var5));
-        this.renderBlocksInstance.renderBlockAsItem(var2, 0, 1.0F);
+        this.renderBlocksInstance.overrideBlockBounds(0.0D, (double)(0.5F - var9), (double)(0.5F + var9 - var7), (double)var7, (double)(0.5F + var9), (double)(0.5F + var9));
+        this.renderBlocksInstance.renderBlockAsItem(var6, 0, 1.0F);
         GL11.glPopMatrix();
         this.renderBlocksInstance.unlockBlockBounds();
         this.renderBlocksInstance.clearOverrideBlockTexture();
         GL11.glPopMatrix();
+
+        if (var2.booleanValue() && var5 != null)
+        {
+            GL11.glPushMatrix();
+            GL11.glTranslatef(-0.453125F * (float)Direction.offsetX[par1EntityItemFrame.hangingDirection], 0.0F, -0.453125F * (float)Direction.offsetZ[par1EntityItemFrame.hangingDirection]);
+            GL11.glRotatef(180.0F + par1EntityItemFrame.rotationYaw, 0.0F, 1.0F, 0.0F);
+
+            if (var3.booleanValue())
+            {
+                Float var10 = Float.valueOf(-0.015625F);
+
+                if (par1EntityItemFrame.getRotation() % 2 == 0)
+                {
+                    var10 = Float.valueOf(var10.floatValue() + var7 / 2.0F);
+                }
+
+                this.renderManager.renderEngine.bindTexture("/misc/mapbg.png");
+                Tessellator var11 = Tessellator.instance;
+                GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
+                GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
+                GL11.glTranslatef(-0.5F, -0.5F, var10.floatValue() - 2.0E-4F);
+                GL11.glScalef(0.0078125F, 0.0078125F, 0.0078125F);
+                GL11.glNormal3f(0.0F, 0.0F, -1.0F);
+                var11.startDrawingQuads();
+                byte var12 = 0;
+                var11.addVertexWithUV((double)(0 - var12), (double)(128 + var12), 0.0D, 0.0D, 1.0D);
+                var11.addVertexWithUV((double)(128 + var12), (double)(128 + var12), 0.0D, 1.0D, 1.0D);
+                var11.addVertexWithUV((double)(128 + var12), (double)(0 - var12), 0.0D, 1.0D, 0.0D);
+                var11.addVertexWithUV((double)(0 - var12), (double)(0 - var12), 0.0D, 0.0D, 0.0D);
+                var11.draw();
+                MapData var13 = Item.map.getMapData(var5.getEntityItem(), par1EntityItemFrame.worldObj);
+
+                if (var13 != null)
+                {
+                    this.renderManager.itemRenderer.mapItemRenderer.renderMap((EntityPlayer)null, this.renderManager.renderEngine, var13);
+                }
+            }
+            else
+            {
+                GL11.glRotatef((float)(-90 * par1EntityItemFrame.getRotation()), 0.0F, 0.0F, 1.0F);
+                GL11.glTranslatef(0.0F, -0.18F, 0.0F);
+                RenderItem.renderInFrame = true;
+                RenderManager.instance.renderEntityWithPosYaw(var5, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
+                RenderItem.renderInFrame = false;
+            }
+
+            GL11.glPopMatrix();
+        }
     }
 
     private void func_82402_b(EntityItemFrame par1EntityItemFrame)
@@ -78,23 +145,9 @@ public class RenderItemFrame extends Render
             var3.getEntityItem().stackSize = 1;
             var3.hoverStart = 0.0F;
             GL11.glPushMatrix();
-            GL11.glTranslatef(-0.453125F * (float)Direction.offsetX[par1EntityItemFrame.hangingDirection], -0.18F, -0.453125F * (float)Direction.offsetZ[par1EntityItemFrame.hangingDirection]);
+            GL11.glTranslatef(-0.453125F * (float)Direction.offsetX[par1EntityItemFrame.hangingDirection], 0.0F, -0.453125F * (float)Direction.offsetZ[par1EntityItemFrame.hangingDirection]);
             GL11.glRotatef(180.0F + par1EntityItemFrame.rotationYaw, 0.0F, 1.0F, 0.0F);
             GL11.glRotatef((float)(-90 * par1EntityItemFrame.getRotation()), 0.0F, 0.0F, 1.0F);
-
-            switch (par1EntityItemFrame.getRotation())
-            {
-                case 1:
-                    GL11.glTranslatef(-0.16F, -0.16F, 0.0F);
-                    break;
-
-                case 2:
-                    GL11.glTranslatef(0.0F, -0.32F, 0.0F);
-                    break;
-
-                case 3:
-                    GL11.glTranslatef(0.16F, -0.16F, 0.0F);
-            }
 
             if (var3.getEntityItem().getItem() == Item.map)
             {
@@ -102,18 +155,17 @@ public class RenderItemFrame extends Render
                 Tessellator var4 = Tessellator.instance;
                 GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
                 GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-                GL11.glScalef(0.00390625F, 0.00390625F, 0.00390625F);
-                GL11.glTranslatef(-65.0F, -107.0F, -3.0F);
+                GL11.glTranslatef(-0.5F, -0.5F, 0.0224F);
+                GL11.glScalef(0.0078125F, 0.0078125F, 0.0078125F);
                 GL11.glNormal3f(0.0F, 0.0F, -1.0F);
                 var4.startDrawingQuads();
-                byte var5 = 7;
+                byte var5 = 0;
                 var4.addVertexWithUV((double)(0 - var5), (double)(128 + var5), 0.0D, 0.0D, 1.0D);
                 var4.addVertexWithUV((double)(128 + var5), (double)(128 + var5), 0.0D, 1.0D, 1.0D);
                 var4.addVertexWithUV((double)(128 + var5), (double)(0 - var5), 0.0D, 1.0D, 0.0D);
                 var4.addVertexWithUV((double)(0 - var5), (double)(0 - var5), 0.0D, 0.0D, 0.0D);
                 var4.draw();
                 MapData var6 = Item.map.getMapData(var3.getEntityItem(), par1EntityItemFrame.worldObj);
-                GL11.glTranslatef(0.0F, 0.0F, -1.0F);
 
                 if (var6 != null)
                 {
@@ -122,6 +174,7 @@ public class RenderItemFrame extends Render
             }
             else
             {
+                GL11.glTranslatef(0.0F, -0.18F, 0.0F);
                 RenderItem.renderInFrame = true;
                 RenderManager.instance.renderEntityWithPosYaw(var3, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
                 RenderItem.renderInFrame = false;
