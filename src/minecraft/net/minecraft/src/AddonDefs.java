@@ -1604,13 +1604,13 @@ public class AddonDefs {
 		AddonManager.Register(doorBlood, "Blood Wood Door");
 		AddonManager.Register(doorCherry, "Cherry Door");
 
-		Item itemDoorOak = new AddonItemDoor(Item.doorWood.itemID - 256, "doorWood", "Oak Door", (BlockDoor) Block.doorWood);
+		Item itemDoorOak = new AddonItemDoor(Item.doorWood.itemID - 256, "doorWood", "Oak Door", (BlockDoor) Block.doorWood).SetIncineratedInCrucible();
 		AddonManager.SetVanillaItemFinal("doorWood", Item.doorWood, itemDoorOak);
-		itemDoorSpruce = new AddonItemDoor(id_itemDoorSpruce, "ginger_doorSpruceItem", "Spruce Door", doorSpruce);
-		itemDoorBirch = new AddonItemDoor(id_itemDoorBirch, "ginger_doorBirchItem", "Birch Door", doorBirch);
-		itemDoorJungle = new AddonItemDoor(id_itemDoorJungle, "ginger_doorJungleItem", "Jungle Door", doorJungle);
-		itemDoorBlood = new AddonItemDoor(id_itemDoorBlood, "ginger_doorBloodItem", "Blood Wood Door", doorBlood);
-		itemDoorCherry = new AddonItemDoor(id_itemDoorCherry, "ginger_doorCherryItem", "Cherry Door", doorCherry);
+		itemDoorSpruce = (FCItemDoor) new AddonItemDoor(id_itemDoorSpruce, "ginger_doorSpruceItem", "Spruce Door", doorSpruce).SetIncineratedInCrucible();
+		itemDoorBirch = (FCItemDoor) new AddonItemDoor(id_itemDoorBirch, "ginger_doorBirchItem", "Birch Door", doorBirch).SetIncineratedInCrucible();
+		itemDoorJungle = (FCItemDoor) new AddonItemDoor(id_itemDoorJungle, "ginger_doorJungleItem", "Jungle Door", doorJungle).SetIncineratedInCrucible();
+		itemDoorBlood = (FCItemDoor) new AddonItemDoor(id_itemDoorBlood, "ginger_doorBloodItem", "Blood Wood Door", doorBlood).SetIncineratedInCrucible();
+		itemDoorCherry = (FCItemDoor) new AddonItemDoor(id_itemDoorCherry, "ginger_doorCherryItem", "Cherry Door", doorCherry).SetIncineratedInCrucible();
 		
 		BlockDoor doorIron = (BlockDoor) new AddonBlockDoorIron(AddonManager.ReplaceBlockID(Block.doorIron)).setHardness(5.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("doorIron").disableStats();
 		AddonManager.SetVanillaBlockFinal("doorIron", Block.doorIron, doorIron);
