@@ -4,7 +4,6 @@ import java.util.List;
 
 public class AddonUtilsBlock {
 	//There's a lot of bad programming practices done here but without being able to edit Block.java there's not much I can do to get around it
-	
 	public static boolean canFenceConnect(IBlockAccess blockAccess, int x, int y, int z, int facing, Block thisBlock) {
 		int blockID = blockAccess.getBlockId(x, y, z);
 		int metadata = blockAccess.getBlockMetadata(x, y, z);
@@ -280,5 +279,37 @@ public class AddonUtilsBlock {
 		}
 		
 		return true;
+	}
+	
+	public static boolean canBlockBeWaterlogged(IBlockAccess blockAccess, int x, int y, int z) {
+		Block block = Block.blocksList[blockAccess.getBlockId(x, y, z)];
+		
+		if (block instanceof FCBlockStairsBase ||
+				block instanceof FCBlockSlab ||
+				block instanceof BlockHalfSlab ||
+				block instanceof AddonBlockChain ||
+				block instanceof AddonBlockLantern ||
+				block instanceof FCBlockSidingAndCorner ||
+				block instanceof FCBlockMoulding ||
+				block instanceof BlockWall ||
+				block instanceof BlockFence ||
+				block instanceof BlockTrapDoor ||
+				block instanceof BlockDoor) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public static int IsValidSourceForFluidBlockToFacing(World world, int x, int y, int z, int facing) {
+		if (world.blockHasTileEntity(x, y, z)) {
+			TileEntity entity = world.getBlockTileEntity(x, y, z);
+			
+			if (entity instanceof AddonTileEntityWaterloggedBlock) {
+				return ((AddonTileEntityWaterloggedBlock) entity).getWaterFlowToFacing(facing);
+			}
+		}
+		
+		return FCUtilsWorld.IsValidSourceForFluidBlockToFacing(world, x, y, z, facing);
 	}
 }

@@ -540,6 +540,7 @@ public class AddonDefs {
 		addlayerDefs();
 		addSubBlockReplaceDefs();
 		addExtraSubBlockDefs();
+		addWaterlogDefs();
 		addEntityDefs();
 		Item.m_bSuppressConflictWarnings=false;
 	}
@@ -2257,6 +2258,13 @@ public class AddonDefs {
 		//AddonManager.Register(stoneBrickEdging, "Stone Brick Edging");
 	}
 
+	private void addWaterlogDefs() {
+		Item bucketWater = new AddonItemBucketWater(Item.bucketWater.itemID - 256);
+		AddonManager.SetVanillaItemFinal("bucketWater", Item.bucketWater, bucketWater);
+		
+		TileEntity.addMapping(AddonTileEntityWaterloggedBlock.class, "WaterloggedBlock");
+	}
+	
 	private void addEntityDefs() {
 		//Vanilla entities
 		AddonManager.ReplaceSpawnableEntity("Squid", FCEntitySquid.class, AddonEntitySquid.class, false);
