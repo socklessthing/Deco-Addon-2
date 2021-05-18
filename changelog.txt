@@ -1,3 +1,8 @@
+Version 2.15.1:
+[list]
+[*]Fixed an issue where books could be crafted out of empty bookshelves instead of full ones.
+[/list]
+
 Version 2.15.0
 Several textures have been used or modified from Quark in this version. Quark is provided under the Creative Commons 3.0 Attribution Non-Commercial Share-Alike license which is compatible with the license Deco uses, which allows me to use textures from there.
 [list]
