@@ -1,6 +1,16 @@
-Version 2.15.1:
+Version 2.16.0
 [list]
-[*]Fixed an issue where books could be crafted out of empty bookshelves instead of full ones.
+[*]Added ash blocks, which can be crafted by packing 8 potash together.
+[*]Added pumice, which can be crafted by packing 2 ash blocks together.
+[*]Added amethyst, which can be crafted with 4 nether quartz in a plus with purple dye in the middle.
+[*]Added amethyst shards, which drop from amethyst when mined in a similar manner to glowstone. 4 shards can be crafted into an amethyst block, and an amethyst block can be crafted back into 4 shards. Additionally, amethyst shards can be crafted with 1 quartz and 1 purple dye. Amethyst shards may also be placed in the world, though they must be attached to a block to do so.
+[*]Added the ability to salt fields using nitre. This stops weeds from growing and freezes crop growth at its current stage. This, combined with the drop change below, allows for large aesthetic fields once again without affecting farming balance for functional purposes.
+[*]Changed crops (except hemp) to be able to grow without hydration. However, unhydrated crops will drop no items. Similarly to the HC bouncing change from 2.14.0, I will add a config option for this in the future.
+[*]Changed acacia to have the same burn time as birch (10 items), and cherry to have the same burn time as spruce (6 items).
+[*]Fixed an issue where empty bookshelves were able to be decrafted into books rather than full ones.
+[*]Fixed an issue where several green stairs had incorrect names.
+[*]Fixed an issue where enchanted books were missing their name.
+[*]Fixed an issue where cherry and acacia logs were not able to be used in ovens.
 [/list]
 
 Version 2.15.0
